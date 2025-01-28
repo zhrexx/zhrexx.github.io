@@ -1,1 +1,124 @@
-<title>zhrexx</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zhrexx - Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Fira Code', monospace;
+      color: #fff;
+      background: #0f172a;
+      line-height: 1.6;
+    }
+    header {
+      text-align: center;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      animation: fadeIn 2s ease-in-out;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #ddd;
+      animation: fadeIn 3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      text-align: center;
+    }
+    section h2 {
+      margin-bottom: 1rem;
+      font-size: 2rem;
+      color: #58a6ff;
+    }
+    section p {
+      margin-bottom: 1rem;
+    }
+    .button {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      color: #fff;
+      background: #2575fc;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .button:hover {
+      background: #1b4c9f;
+    }
+    .project {
+      background: #1e293b;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .project h3 {
+      color: #58a6ff;
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      margin-top: 2rem;
+      padding: 1rem;
+      text-align: center;
+      background: linear-gradient(to right, #2575fc, #6a11cb);
+    }
+    footer p {
+      font-size: 1rem;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to My Portfolio</h1>
+    <p>Creative Coder | Open-Source Enthusiast</p>
+  </header>
+
+  <section>
+    <h2>About Me</h2>
+    <p>Hi! I'm <strong>zhrexx</strong>, a passionate developer exploring low-level programming, networking, and crafting tools to enhance performance.</p>
+    <p><strong>Currently Working On:</strong></p>
+    <ul>
+      <li>OrtaVM: A virtual machine with its own language</li>
+      <li>samba.h: A dynamic build system</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Featured Projects</h2>
+    <div class="project">
+      <h3>OrtaVM</h3>
+      <p>A virtual machine with its own assembly and bytecode, compiling to ELF64 executables with beautiful error handling.</p>
+      <a href="https://github.com/zhrexx/OrtaVM" class="button">View Repository</a>
+    </div>
+    <div class="project">
+      <h3>samba.h</h3>
+      <p>A modular build system designed for dynamic configurations and optimized workflows.</p>
+      <a href="https://github.com/zhrxxgroup/samba.h" class="button">View Repository</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Thank you for visiting! Let's collaborate and build amazing projects!</p>
+    <p>📧 Email: <a href="mailto:info@zhrxxgroup.com" style="color: #fff; text-decoration: underline;">info@zhrxxgroup.com</a></p>
+    <p>🌐 Website: <a href="https://zhrxxgroup.com" style="color: #fff; text-decoration: underline;">zhrxxgroup.com</a></p>
+  </footer>
+</body>
+</html>
