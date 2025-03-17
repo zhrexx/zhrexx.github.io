@@ -1,0 +1,31 @@
+{
+  "packages": {
+    "lpeg": {
+      "latest": "1.0.2",
+      "versions": {
+        "1.0.2": {
+          "url": "http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz",
+          "sha256": "e9c4e57b6fd4a4399bf5a87ea4b8cd8a7a0fca68a17ad83e04b7066bcd82eac5"
+        }
+      }
+    },
+    "luafilesystem": {
+      "latest": "1.8.0",
+      "versions": {
+        "1.8.0": {
+          "url": "https://github.com/keplerproject/luafilesystem/archive/refs/tags/v1_8_0.tar.gz",
+          "sha256": "f77e1c9b8a3df1a5c7d9b0e0b2a1c4e5d6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1"
+        }
+      }
+    },
+    "luasocket": {
+      "latest": "3.0rc1",
+      "versions": {
+        "3.0rc1": {
+          "url": "https://github.com/diegonehab/luasocket/archive/refs/tags/v3.0rc1.tar.gz",
+          "sha256": "1df64ed6f6e66f86f2a52a92b9f94bdc14c3e4bf45d98c7a1f792c1b5e6aabc2"
+        }
+      }
+    }
+  }
+}
