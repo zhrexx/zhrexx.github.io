@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Index of .</title>
+    <style>
+        :root {
+            --bg-color: #2a2a2e;
+            --text-color: #f9f9fa;
+            --accent-color: #0060df;
+            --hover-color: #0a84ff;
+            --border-color: #4a4a4f;
+            --row-hover: #35353b;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            background-color: #32323a;
+        }
+        header {
+            background-color: var(--accent-color);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+        .controls select {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .controls button {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .controls button:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+        .search-bar {
+            padding: 10px 20px;
+            background-color: #42424a;
+        }
+        #search {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            background-color: #2a2a2e;
+            color: var(--text-color);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            padding: 12px 20px;
+            text-align: left;
+            background-color: #42424a;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+        }
+        th:hover {
+            background-color: #4a4a54;
+        }
+        td {
+            padding: 10px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        tr:hover {
+            background-color: var(--row-hover);
+        }
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+        }
+        a:hover {
+            color: var(--hover-color);
+        }
+        .folder {
+            color: #45a1ff;
+        }
+        .folder:before {
+            content: '📁 ';
+        }
+        .file:before {
+            content: '📄 ';
+        }
+        .size, .date {
+            text-align: right;
+            white-space: nowrap;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #32323a;
+            color: #b1b1b3;
+            font-size: 0.9rem;
+        }
+        .theme-switcher {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .light-theme {
+            --bg-color: #f9f9fa;
+            --text-color: #0c0c0d;
+            --border-color: #d7d7db;
+            --row-hover: #e7e7e7;
+        }
+        @media (max-width: 768px) {
+            .date {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <header>
+            <h1>Index of .</h1>
+            <div class='controls'>
+                <select id='view-mode'>
+                    <option value='list'>List View</option>
+                    <option value='grid'>Grid View</option>
+                </select>
+                <button id='theme-toggle'>Toggle Theme</button>
+            </div>
+        </header>
+        <div class='search-bar'>
+            <input type='text' id='search' placeholder='Search files and folders...'>
+        </div>
+        <div class='table-container'>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-sort='name'>Name</th>
+                        <th data-sort='size' class='size'>Size</th>
+                        <th data-sort='date' class='date'>Last Modified</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href='.' class='folder'>..</a></td>
+                        <td class='size'>-</td>
+                        <td class='date'>-</td>
+                    </tr>
+                    <tr>
+                        <td><a href='./..' class='folder'>..</a></td>
+                        <td class='size'>-</td>
+                        <td class='date'>2025-03-17 15:32:44</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer>
+            <p>Generated on Mar 17 2025</p>
+            <div class='theme-switcher'>
+                <button id='theme-toggle-bottom'>Switch Theme</button>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeToggleBottom = document.getElementById('theme-toggle-bottom');
+            const body = document.body;
+            const viewMode = document.getElementById('view-mode');
+            const searchInput = document.getElementById('search');
+            const tableHeaders = document.querySelectorAll('th[data-sort]');
+            const tableRows = document.querySelectorAll('tbody tr');
+            
+            function toggleTheme() {
+                body.classList.toggle('light-theme');
+                const isLightTheme = body.classList.contains('light-theme');
+                localStorage.setItem('lightTheme', isLightTheme);
+            }
+            
+            if (localStorage.getItem('lightTheme') === 'true') {
+                body.classList.add('light-theme');
+            }
+            
+            themeToggle.addEventListener('click', toggleTheme);
+            themeToggleBottom.addEventListener('click', toggleTheme);
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                tableRows.forEach(row => {
+                    const fileName = row.querySelector('a').textContent.toLowerCase();
+                    if (fileName === '..') {
+                        row.style.display = '';
+                        return;
+                    }
+                    
+                    if (fileName.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+            
+            let currentSort = { column: 'name', direction: 'asc' };
+            
+            function sortTable(column) {
+                const tableBody = document.querySelector('tbody');
+                const rows = Array.from(tableRows);
+                const parentRow = rows.shift();
+                
+                if (currentSort.column === column) {
+                    currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    currentSort.column = column;
+                    currentSort.direction = 'asc';
+                }
+                
+                rows.sort((a, b) => {
+                    const aIsFolder = a.querySelector('a').classList.contains('folder');
+                    const bIsFolder = b.querySelector('a').classList.contains('folder');
+                    
+                    if (aIsFolder && !bIsFolder) return -1;
+                    if (!aIsFolder && bIsFolder) return 1;
+                    
+                    let aValue, bValue;
+                    
+                    if (column === 'name') {
+                        aValue = a.querySelector('a').textContent.toLowerCase();
+                        bValue = b.querySelector('a').textContent.toLowerCase();
+                    } else if (column === 'size') {
+                        const aSizeText = a.querySelector('.size').textContent;
+                        const bSizeText = b.querySelector('.size').textContent;
+                        
+                        if (aSizeText === '-') aValue = 0;
+                        else {
+                            const aSizeVal = parseFloat(aSizeText);
+                            if (aSizeText.includes('KB')) aValue = aSizeVal * 1024;
+                            else if (aSizeText.includes('MB')) aValue = aSizeVal * 1024 * 1024;
+                            else if (aSizeText.includes('GB')) aValue = aSizeVal * 1024 * 1024 * 1024;
+                            else aValue = aSizeVal;
+                        }
+                        
+                        if (bSizeText === '-') bValue = 0;
+                        else {
+                            const bSizeVal = parseFloat(bSizeText);
+                            if (bSizeText.includes('KB')) bValue = bSizeVal * 1024;
+                            else if (bSizeText.includes('MB')) bValue = bSizeVal * 1024 * 1024;
+                            else if (bSizeText.includes('GB')) bValue = bSizeVal * 1024 * 1024 * 1024;
+                            else bValue = bSizeVal;
+                        }
+                    } else if (column === 'date') {
+                        aValue = new Date(a.querySelector('.date').textContent);
+                        bValue = new Date(b.querySelector('.date').textContent);
+                    }
+                    
+                    if (currentSort.direction === 'asc') {
+                        return aValue > bValue ? 1 : -1;
+                    } else {
+                        return aValue < bValue ? 1 : -1;
+                    }
+                });
+                
+                while (tableBody.firstChild) {
+                    tableBody.removeChild(tableBody.firstChild);
+                }
+                
+                tableBody.appendChild(parentRow);
+                
+                rows.forEach(row => {
+                    tableBody.appendChild(row);
+                });
+            }
+            
+            tableHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const column = this.getAttribute('data-sort');
+                    sortTable(column);
+                });
+            });
+            
+            viewMode.addEventListener('change', function() {
+                const tableContainer = document.querySelector('.table-container');
+                if (this.value === 'grid') {
+                    tableContainer.innerHTML = `
+                        <div class='grid-view'>
+                            <div class='grid-item parent-dir'>
+                                <a href='.' class='folder'>..</a>
+                            </div>
+                            <div class='grid-item'>
+                                <a href='./..' class='folder'>..</a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    const style = document.createElement('style');
+                    style.id = 'grid-styles';
+                    style.textContent = `
+                        .grid-view {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                            gap: 15px;
+                            padding: 20px;
+                        }
+                        .grid-item {
+                            background-color: #42424a;
+                            border-radius: 6px;
+                            padding: 15px;
+                            text-align: center;
+                            transition: transform 0.2s, background-color 0.2s;
+                        }
+                        .grid-item:hover {
+                            background-color: var(--row-hover);
+                            transform: translateY(-3px);
+                        }
+                        .grid-item a {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            height: 100%;
+                        }
+                        .grid-item a:before {
+                            font-size: 2rem;
+                            margin-bottom: 10px;
+                        }
+                        .parent-dir {
+                            background-color: var(--accent-color);
+                        }
+                        .light-theme .grid-item {
+                            background-color: #e0e0e6;
+                        }
+                        .light-theme .parent-dir {
+                            background-color: var(--accent-color);
+                        }
+                    `;
+                    document.head.appendChild(style);
+                } else {
+                    const gridStyles = document.getElementById('grid-styles');
+                    if (gridStyles) gridStyles.remove();
+                    
+                    tableContainer.innerHTML = `
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th data-sort='name'>Name</th>
+                                    <th data-sort='size' class='size'>Size</th>
+                                    <th data-sort='date' class='date'>Last Modified</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href='.' class='folder'>..</a></td>
+                                    <td class='size'>-</td>
+                                    <td class='date'>-</td>
+                                </tr>
+                                <tr>
+                                    <td><a href='./..' class='folder'>..</a></td>
+                                    <td class='size'>-</td>
+                                    <td class='date'>2025-03-17 15:32:44</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    `;
+                    
+                    const newTableHeaders = document.querySelectorAll('th[data-sort]');
+                    newTableHeaders.forEach(header => {
+                        header.addEventListener('click', function() {
+                            const column = this.getAttribute('data-sort');
+                            sortTable(column);
+                        });
+                    });
+                }
+                
+                localStorage.setItem('viewMode', this.value);
+            });
+            
+            const savedViewMode = localStorage.getItem('viewMode');
+            if (savedViewMode) {
+                viewMode.value = savedViewMode;
+                viewMode.dispatchEvent(new Event('change'));
+            }
+        });
+    </script>
+</body>
+</html>
