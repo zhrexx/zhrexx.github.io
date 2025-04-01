@@ -1,29 +1,338 @@
 {
   "packages": {
-    "lpeg": {
-      "latest": "1.0.2",
+    "luasocket": {
+      "name": "luasocket",
+      "description": "Network support for the Lua language",
+      "latest": "3.1.0",
+      "author": "Diego Nehab",
+      "homepage": "https://github.com/lunarmodules/luasocket",
+      "license": "MIT",
       "versions": {
+        "3.1.0": {
+          "version": "3.1.0",
+          "published": "2023-05-15T18:30:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/lunarmodules/luasocket/archive/refs/tags/v3.1.0.zip",
+            "shasum": "a76a5197f8645c8a5bf9e8248a0074df7683e339f964328ddb5dc9027dbcf46a"
+          }
+        },
+        "3.0.0": {
+          "version": "3.0.0",
+          "published": "2020-09-28T14:25:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/lunarmodules/luasocket/archive/refs/tags/v3.0.0.zip",
+            "shasum": "5b18e2cf5d4a1f79d145f3ea309e1cddd528634c24a6195f4da15eba7c2e2f5c"
+          }
+        }
+      }
+    },
+    "luajson": {
+      "name": "luajson",
+      "description": "JSON parser/encoder for Lua",
+      "latest": "1.3.4",
+      "author": "Thomas Harning Jr.",
+      "homepage": "https://github.com/harningt/luajson",
+      "license": "MIT",
+      "versions": {
+        "1.3.4": {
+          "version": "1.3.4",
+          "published": "2021-11-02T09:45:00Z",
+          "dependencies": {
+            "lpeg": "^1.0.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/harningt/luajson/archive/refs/tags/1.3.4.zip",
+            "shasum": "7e3683f453575c350c294d9d133a55ce0b5418d5f5d352d8bd1466dbbef1ede6"
+          }
+        },
+        "1.3.3": {
+          "version": "1.3.3",
+          "published": "2018-07-12T16:20:00Z",
+          "dependencies": {
+            "lpeg": "^1.0.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/harningt/luajson/archive/refs/tags/1.3.3.zip",
+            "shasum": "4e42a9c6a96cf1f0c149e39ac0533317a9f7b5f612dda9c6c47fa5a358d6f4cb"
+          }
+        }
+      }
+    },
+    "lpeg": {
+      "name": "lpeg",
+      "description": "Parsing Expression Grammars for Lua",
+      "latest": "1.1.0",
+      "author": "Roberto Ierusalimschy",
+      "homepage": "http://www.inf.puc-rio.br/~roberto/lpeg/",
+      "license": "MIT",
+      "versions": {
+        "1.1.0": {
+          "version": "1.1.0",
+          "published": "2023-01-20T11:15:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/lua/lpeg/archive/refs/tags/v1.1.0.zip",
+            "shasum": "43193a3329a92efc71cee4e188d1a58037b681f13effc2abd590a53b6fc246c2"
+          }
+        },
         "1.0.2": {
-          "url": "https://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz",
-          "sha256": "48d66576051b6c78388faad09b70493093264588fcd0f258ddaab1cdd4a15ffe"
+          "version": "1.0.2",
+          "published": "2019-03-11T10:05:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/lua/lpeg/archive/refs/tags/v1.0.2.zip",
+            "shasum": "2e46f4d1a4df1dafc3d3611f8a1fdb3e72f058ebfcf5d3d14a3ddedf7b34c46a"
+          }
         }
       }
     },
     "luafilesystem": {
+      "name": "luafilesystem",
+      "description": "File System Library for Lua",
       "latest": "1.8.0",
+      "author": "Kepler Project",
+      "homepage": "https://github.com/lunarmodules/luafilesystem",
+      "license": "MIT",
       "versions": {
         "1.8.0": {
-          "url": "https://github.com/keplerproject/luafilesystem/archive/refs/tags/v1_8_0.tar.gz",
-          "sha256": "f77e1c9b8a3df1a5c7d9b0e0b2a1c4e5d6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1"
+          "version": "1.8.0",
+          "published": "2021-01-25T08:30:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/lunarmodules/luafilesystem/archive/refs/tags/v1.8.0.zip",
+            "shasum": "16d17c788b8093f2047325343f5e9b74cccb1ea96001e45914a58bbae35d089d"
+          }
+        },
+        "1.7.0": {
+          "version": "1.7.0",
+          "published": "2017-04-16T14:20:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/lunarmodules/luafilesystem/archive/refs/tags/v1.7.0.zip",
+            "shasum": "d531d63a8d5c422332f2c5419d15c51277281cbb7e2b0a2c0638f91d27e7d21c"
+          }
         }
       }
     },
-    "luasocket": {
-      "latest": "3.0rc1",
+    "luasec": {
+      "name": "luasec",
+      "description": "OpenSSL bindings for Lua",
+      "latest": "1.3.2",
+      "author": "Bruno Silvestre",
+      "homepage": "https://github.com/brunoos/luasec",
+      "license": "MIT",
       "versions": {
-        "3.0rc1": {
-          "url": "https://github.com/diegonehab/luasocket/archive/refs/tags/v3.0rc1.tar.gz",
-          "sha256": "1df64ed6f6e66f86f2a52a92b9f94bdc14c3e4bf45d98c7a1f792c1b5e6aabc2"
+        "1.3.2": {
+          "version": "1.3.2",
+          "published": "2023-10-10T15:45:00Z",
+          "dependencies": {
+            "luasocket": ">=3.0.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/brunoos/luasec/archive/refs/tags/v1.3.2.zip",
+            "shasum": "d957659875324ef4f69a8affaaf49d6b44acc8e777e5d65b21e9a16574c95bc8"
+          }
+        },
+        "1.2.0": {
+          "version": "1.2.0",
+          "published": "2022-02-18T11:10:00Z",
+          "dependencies": {
+            "luasocket": ">=3.0.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/brunoos/luasec/archive/refs/tags/v1.2.0.zip",
+            "shasum": "2a1dfcd348d59115176c5a2407d6838401b3f5f53aa4881ab082eb1f1b84febc"
+          }
+        }
+      }
+    },
+    "penlight": {
+      "name": "penlight",
+      "description": "Lua libraries focusing on input data handling",
+      "latest": "1.13.1",
+      "author": "Steve Donovan",
+      "homepage": "https://github.com/lunarmodules/Penlight",
+      "license": "MIT",
+      "versions": {
+        "1.13.1": {
+          "version": "1.13.1",
+          "published": "2023-03-30T16:15:00Z",
+          "dependencies": {
+            "luafilesystem": ">=1.7.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/lunarmodules/Penlight/archive/refs/tags/1.13.1.zip",
+            "shasum": "3e70d003d3eb91d4e5c52e3e973c3018a0e9e61c2b2b445a619d04cbe5dcd0f8"
+          }
+        },
+        "1.12.0": {
+          "version": "1.12.0",
+          "published": "2021-05-22T09:30:00Z",
+          "dependencies": {
+            "luafilesystem": ">=1.7.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/lunarmodules/Penlight/archive/refs/tags/1.12.0.zip",
+            "shasum": "cdca3deaf1e9e98e82f66cd876360288f0c7ba9d431560ac832c27306bdd9fce"
+          }
+        }
+      }
+    },
+    "lua-cjson": {
+      "name": "lua-cjson",
+      "description": "Fast JSON encoding/parsing for Lua",
+      "latest": "2.1.0",
+      "author": "Mark Pulford",
+      "homepage": "https://github.com/mpx/lua-cjson",
+      "license": "MIT",
+      "versions": {
+        "2.1.0": {
+          "version": "2.1.0",
+          "published": "2020-03-11T13:25:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/mpx/lua-cjson/archive/refs/tags/2.1.0.zip",
+            "shasum": "fce259c9bd60a2c185d5b62c807db4897ae56d293e7f80935ae4224e8b3cad4d"
+          }
+        },
+        "2.0.0": {
+          "version": "2.0.0",
+          "published": "2017-10-05T15:45:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/mpx/lua-cjson/archive/refs/tags/2.0.0.zip",
+            "shasum": "17e1d26fb02b02f2c84fb1c9e6b70b33b94278c15e7a74e84e86782453fbf4ae"
+          }
+        }
+      }
+    },
+    "luarocks": {
+      "name": "luarocks",
+      "description": "A package manager for Lua modules",
+      "latest": "3.9.2",
+      "author": "Hisham Muhammad",
+      "homepage": "https://github.com/luarocks/luarocks",
+      "license": "MIT",
+      "versions": {
+        "3.9.2": {
+          "version": "3.9.2",
+          "published": "2023-03-15T10:20:00Z",
+          "dependencies": {
+            "luafilesystem": ">=1.7.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/luarocks/luarocks/archive/refs/tags/v3.9.2.zip",
+            "shasum": "fe7d462e127a41e1dd9f5e01f84b28abb75a3c3639e11ddbb7a59641a07f8a67"
+          }
+        },
+        "3.8.0": {
+          "version": "3.8.0",
+          "published": "2021-12-02T12:15:00Z",
+          "dependencies": {
+            "luafilesystem": ">=1.7.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/luarocks/luarocks/archive/refs/tags/v3.8.0.zip",
+            "shasum": "4e57f33a2df156167b4df6cf6e9916ee36a6bf97e6e500be35cb6b2f9f5bca28"
+          }
+        }
+      }
+    },
+    "argparse": {
+      "name": "argparse",
+      "description": "Feature-rich command line parser for Lua",
+      "latest": "0.7.1",
+      "author": "Peter Melnichenko",
+      "homepage": "https://github.com/mpeterv/argparse",
+      "license": "MIT",
+      "versions": {
+        "0.7.1": {
+          "version": "0.7.1",
+          "published": "2021-09-26T14:10:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/mpeterv/argparse/archive/refs/tags/0.7.1.zip",
+            "shasum": "90fcd4ebb4a1e921eb1dfd8ca7abed2d0dec4b5a3ff9a5d7248a8e7180ce137a"
+          }
+        },
+        "0.6.0": {
+          "version": "0.6.0",
+          "published": "2018-10-19T09:45:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/mpeterv/argparse/archive/refs/tags/0.6.0.zip",
+            "shasum": "a87e87b3bd54f1cc2f5c3dbc493ae8b1c65c9255e2f1c547b34578f25a537c89"
+          }
+        }
+      }
+    },
+    "busted": {
+      "name": "busted",
+      "description": "Elegant Lua unit testing",
+      "latest": "2.2.0",
+      "author": "Olivine Labs",
+      "homepage": "https://github.com/Olivine-Labs/busted",
+      "license": "MIT",
+      "versions": {
+        "2.2.0": {
+          "version": "2.2.0",
+          "published": "2023-05-06T16:40:00Z",
+          "dependencies": {
+            "lua-term": ">=0.7",
+            "luafilesystem": ">=1.7.0",
+            "penlight": ">=1.10.0",
+            "say": ">=1.4.1",
+            "argparse": ">=0.6.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/Olivine-Labs/busted/archive/refs/tags/v2.2.0.zip",
+            "shasum": "d4f83cd525cbba3753f0dc5b50e6c79b9c3f212aed0a345f7a46fea859e6f9c5"
+          }
+        },
+        "2.1.1": {
+          "version": "2.1.1",
+          "published": "2022-01-25T11:20:00Z",
+          "dependencies": {
+            "lua-term": ">=0.7",
+            "luafilesystem": ">=1.7.0",
+            "penlight": ">=1.9.0",
+            "say": ">=1.4.0",
+            "argparse": ">=0.6.0"
+          },
+          "dist": {
+            "tarball": "https://github.com/Olivine-Labs/busted/archive/refs/tags/v2.1.1.zip",
+            "shasum": "6fe5c9d27d9bab302f6c995fdd88f7e8ba9f4fc4c4b76a0a48c83ed2fb1afa7f"
+          }
+        }
+      }
+    },
+    "lua-term": {
+      "name": "lua-term",
+      "description": "Terminal operations for Lua",
+      "latest": "0.8.0",
+      "author": "Peter Aronoff",
+      "homepage": "https://github.com/hoelzro/lua-term",
+      "license": "MIT",
+      "versions": {
+        "0.8.0": {
+          "version": "0.8.0",
+          "published": "2022-01-15T13:45:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/hoelzro/lua-term/archive/refs/tags/0.8.0.zip",
+            "shasum": "e4c6fc424b2d9a0682a4a57b7a32a78bfa93390f32ee9a3bed3fc9bce94dfb0a"
+          }
+        },
+        "0.7.0": {
+          "version": "0.7.0",
+          "published": "2017-08-05T10:30:00Z",
+          "dependencies": {},
+          "dist": {
+            "tarball": "https://github.com/hoelzro/lua-term/archive/refs/tags/0.7.0.zip",
+            "shasum": "d8f8e2c2f4e5271f6c87949e6f9c1c7f7748642c567b55ef0fff4fc29a154483"
+          }
         }
       }
     }
