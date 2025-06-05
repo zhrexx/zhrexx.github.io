@@ -3,206 +3,548 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zhrexx - Portfolio</title>
+  <title>zhrexx - Low-Level Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    html { scroll-behavior: smooth; }
+    body { 
+      background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+      color: #ffffff; 
+      font-family: 'Inter', sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      line-height: 1.6; 
+      overflow-x: hidden; 
+      min-height: 100vh;
     }
-    body {
-      font-family: 'Fira Code', monospace;
-      background: #0f172a;
-      color: #fff;
-      line-height: 1.6;
-      overflow-x: hidden;
+    .header { 
+      position: relative; 
+      height: 100vh; 
+      display: flex; 
+      flex-direction: column; 
+      justify-content: center; 
+      align-items: center; 
+      text-align: center; 
+      background: transparent;
+      perspective: 1000px; 
     }
-    header {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
+    .header-content { 
+      position: relative; 
+      z-index: 1; 
+      animation: fadeInUp 1s ease-out; 
+      transform-style: preserve-3d; 
     }
-    header h1 {
-      font-size: 3.5rem;
-      animation: fadeIn 2s ease-in-out;
+    .header h1 { 
+      font-size: 72px; 
+      font-weight: 900; 
+      margin: 0; 
+      text-transform: uppercase; 
+      letter-spacing: 5px; 
+      text-shadow: 0 0 20px rgba(112, 165, 253, 0.7); 
+      transition: transform 0.3s ease; 
     }
-    header p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      color: #ddd;
-    }
-    section {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1rem;
-      text-align: center;
-    }
-    section h2 {
-      font-size: 2rem;
-      color: #58a6ff;
-      margin-bottom: 1rem;
-    }
-    .project {
-      background: #1e293b;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      padding: 1.5rem;
-      text-align: left;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    .project h3 {
-      color: #58a6ff;
-      margin-bottom: 0.5rem;
-    }
-    .project p {
-      margin-bottom: 1rem;
-    }
-    .button {
-      display: inline-block;
-      padding: 0.8rem 1.5rem;
-      color: white;
-      background: #2575fc;
+    .header h1 a {
+      color: inherit;
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s ease;
+      transition: color 0.3s ease;
     }
-    .button:hover {
-      background: #1b4c9f;
+    .header h1 a:hover {
+      color: #bf91f3;
     }
-    footer {
-      margin-top: 2rem;
-      padding: 1.5rem;
-      text-align: center;
-      background: linear-gradient(135deg, #2575fc, #6a11cb);
+    .header h2 { 
+      font-size: 24px; 
+      font-weight: 400; 
+      margin-top: 10px; 
+      opacity: 0.8; 
+      transition: transform 0.3s ease; 
     }
-    footer p {
-      font-size: 1rem;
-      color: #ddd;
+    .header:hover h1 { 
+      transform: translateZ(50px) rotateX(10deg); 
     }
-    /* Chatbot Styles */
-    .chatbot-container {
-      margin: 2rem auto;
-      max-width: 600px;
-      padding: 1rem;
-      background: #1e293b;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    .header:hover h2 { 
+      transform: translateZ(30px) rotateX(10deg); 
     }
-    .chatbot-header {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: #58a6ff;
+    nav { 
+      position: fixed; 
+      top: 20px; 
+      right: 20px; 
+      z-index: 1000; 
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 20px; 
+      border-radius: 15px; 
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
-    .chatbox {
-      max-height: 300px;
-      overflow-y: auto;
-      border: 2px solid #58a6ff;
-      border-radius: 8px;
-      padding: 1rem;
-      background: #0f172a;
+    nav a { 
+      color: #ffffff; 
+      text-decoration: none; 
+      margin: 0 15px; 
+      font-size: 18px; 
+      position: relative; 
+      transition: color 0.3s; 
     }
-    .chat {
-      margin-bottom: 1rem;
+    nav a::after { 
+      content: ''; 
+      position: absolute; 
+      width: 0; 
+      height: 2px; 
+      bottom: -5px; 
+      left: 0; 
+      background: #bf91f3; 
+      transition: width 0.3s ease; 
     }
-    .user {
-      text-align: right;
-      color: #4ade80;
+    nav a:hover::after { 
+      width: 100%; 
     }
-    .bot {
-      text-align: left;
-      color: #f75c7e;
+    nav a:hover { 
+      color: #bf91f3; 
     }
-    .typing {
-      font-style: italic;
-      opacity: 0.8;
+    main { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 40px 20px; 
+      position: relative;
     }
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+    .section { 
+      margin-bottom: 80px; 
+      padding: 40px; 
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px; 
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transition: transform 0.5s ease, opacity 0.5s ease; 
+      opacity: 0; 
+      transform: scale(0.95) translateZ(0); 
+      z-index: 10;
+    }
+    .section.visible { 
+      opacity: 1; 
+      transform: scale(1) translateZ(50px); 
+    }
+    .section:hover { 
+      transform: translateY(-10px) translateZ(100px); 
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .section h2 { 
+      font-size: 36px; 
+      font-weight: 700; 
+      margin-bottom: 20px; 
+      color: #70a5fd; 
+      position: relative; 
+      overflow: hidden; 
+    }
+    .section h2::after { 
+      content: ''; 
+      position: absolute; 
+      width: 50px; 
+      height: 3px; 
+      background: #70a5fd; 
+      bottom: -5px; 
+      left: 0; 
+      transition: width 0.5s ease; 
+    }
+    .section:hover h2::after { 
+      width: 100%; 
+    }
+    .section p { 
+      font-size: 18px; 
+      opacity: 0.9; 
+    }
+    .project-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+      gap: 30px; 
+    }
+    .project-card { 
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px; 
+      border-radius: 15px; 
+      transition: all 0.5s ease; 
+      transform-style: preserve-3d; 
+      perspective: 1000px; 
+      z-index: 10; 
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .project-card:hover { 
+      transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.05); 
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 40px rgba(112, 165, 253, 0.2); 
+    }
+    .project-card h3 { 
+      font-size: 24px; 
+      margin-bottom: 10px; 
+      transition: color 0.3s ease; 
+    }
+    .project-card:hover h3 { 
+      color: #bf91f3; 
+    }
+    .project-card p { 
+      font-size: 16px; 
+      margin-bottom: 15px; 
+    }
+    .project-card a { 
+      color: #70a5fd; 
+      text-decoration: none; 
+      font-weight: 600; 
+      position: relative; 
+      transition: color 0.3s ease; 
+    }
+    .project-card a::after { 
+      content: ''; 
+      position: absolute; 
+      width: 0; 
+      height: 2px; 
+      bottom: -2px; 
+      left: 0; 
+      background: #bf91f3; 
+      transition: width 0.3s ease; 
+    }
+    .project-card a:hover::after { 
+      width: 100%; 
+    }
+    .project-card a:hover { 
+      color: #bf91f3; 
+    }
+    .tech-grid { 
+      display: flex; 
+      justify-content: center; 
+      gap: 40px; 
+      flex-wrap: wrap; 
+    }
+    .tech-item { 
+      text-align: center; 
+      transition: transform 0.5s ease, filter 0.5s ease; 
+      transform-style: preserve-3d; 
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    .tech-item:hover { 
+      transform: scale(1.2) rotateZ(10deg); 
+      filter: drop-shadow(0 0 15px #70a5fd); 
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .tech-item i { 
+      font-size: 48px; 
+      margin-bottom: 10px; 
+      transition: transform 0.5s ease; 
+    }
+    .tech-item:hover i { 
+      transform: translateZ(20px); 
+    }
+    .tech-item p { 
+      font-size: 18px; 
+    }
+    footer { 
+      text-align: center; 
+      padding: 20px; 
+      font-size: 14px; 
+      opacity: 0.7; 
+      position: relative; 
+      z-index: 10; 
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #bf91f3;
+    }
+    .scroll-arrow { 
+      position: absolute; 
+      bottom: 20px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      animation: bounce 2s infinite; 
+    }
+    .scroll-arrow a { 
+      color: #ffffff; 
+      font-size: 36px; 
+      transition: color 0.3s ease; 
+    }
+    .scroll-arrow a:hover { 
+      color: #bf91f3; 
+    }
+    .mail-button { 
+      display: inline-block; 
+      padding: 10px 20px; 
+      background: rgba(191, 145, 243, 0.2);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(191, 145, 243, 0.3);
+      color: #ffffff; 
+      text-decoration: none; 
+      border-radius: 10px; 
+      font-weight: 600; 
+      transition: all 0.5s ease; 
+      transform-style: preserve-3d; 
+    }
+    .mail-button:hover { 
+      background: rgba(191, 145, 243, 0.4);
+      transform: scale(1.1) translateZ(20px); 
+      box-shadow: 0 10px 20px rgba(191, 145, 243, 0.3); 
+    }
+    .mail-button i { 
+      margin-right: 5px; 
+      transition: transform 0.5s ease; 
+    }
+    .mail-button:hover i { 
+      transform: translateX(5px); 
+    }
+    .back-to-top { 
+      position: fixed; 
+      bottom: 20px; 
+      right: 20px; 
+      background: rgba(112, 165, 253, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(112, 165, 253, 0.3);
+      color: #ffffff; 
+      width: 50px; 
+      height: 50px; 
+      border-radius: 50%; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      cursor: pointer; 
+      opacity: 0; 
+      transition: all 0.3s ease; 
+      z-index: 10; 
+    }
+    .back-to-top.show { 
+      opacity: 1; 
+    }
+    .back-to-top:hover { 
+      background: rgba(191, 145, 243, 0.8);
+      transform: scale(1.2) rotate(360deg); 
+      box-shadow: 0 10px 20px rgba(191, 145, 243, 0.3);
+    }
+    .progress-container { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 4px; 
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1000; 
+    }
+    .progress-bar { 
+      height: 100%; 
+      background: linear-gradient(90deg, #70a5fd, #bf91f3);
+      width: 0%; 
+      transition: width 0.1s ease; 
+      box-shadow: 0 0 10px #70a5fd; 
+    }
+    #canvas-container { 
+      position: fixed; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 100%; 
+      z-index: -1; 
+      pointer-events: none; 
+    }
+    @keyframes bounce { 
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 
+      40% { transform: translateY(-15px); } 
+      60% { transform: translateY(-7px); } 
+    }
+    @keyframes fadeInUp { 
+      from { opacity: 0; transform: translateY(30px); } 
+      to { opacity: 1; transform: translateY(0); } 
+    }
+    @keyframes fadeIn { 
+      from { opacity: 0; } 
+      to { opacity: 1; } 
+    }
+    @keyframes rotate { 
+      from { transform: rotateY(0deg); } 
+      to { transform: rotateY(360deg); } 
+    }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 48px; }
+      .header h2 { font-size: 18px; }
+      nav { top: 10px; right: 10px; padding: 5px 10px; }
+      nav a { margin: 0 10px; font-size: 16px; }
+      .section { padding: 20px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .tech-item i { font-size: 36px; }
+      .tech-item p { font-size: 16px; }
+      footer { flex-direction: column; gap: 10px; }
     }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const chats = [
-        { user: "country", bot: "Germany" },
-        { user: "favorite lang", bot: "C and Lua" },
-        { user: "current project", bot: "OrtaVM and samba.h" },
-        { user: "OS", bot: "Fedora Linux" },
-      ];
-
-      const chatbox = document.querySelector(".chatbox");
-      let index = 0;
-
-      function addChat(userMessage, botMessage) {
-        const userDiv = document.createElement("div");
-        userDiv.className = "chat user";
-        userDiv.textContent = `You: ${userMessage}`;
-        chatbox.appendChild(userDiv);
-
-        const botDiv = document.createElement("div");
-        botDiv.className = "chat bot typing";
-        botDiv.textContent = "Bot is typing...";
-        chatbox.appendChild(botDiv);
-
-        setTimeout(() => {
-          botDiv.textContent = `Bot: ${botMessage}`;
-          botDiv.classList.remove("typing");
-          chatbox.scrollTop = chatbox.scrollHeight;
-        }, 1000);
-      }
-
-      function startChat() {
-        if (index < chats.length) {
-          addChat(chats[index].user, chats[index].bot);
-          index++;
-          setTimeout(startChat, 2500);
-        }
-      }
-
-      startChat();
-    });
-  </script>
 </head>
 <body>
-  <header>
-    <h1>Welcome to My Portfolio</h1>
-    <p>Creative Coder | Open-Source Enthusiast</p>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div id="canvas-container"></div>
+  <header class="header">
+    <div class="header-content">
+      <h1><a href="https://github.com/zhrexx">zhrexx</a></h1>
+      <h2>Low-Level Developer | Performance Enthusiast</h2>
+    </div>
+    <div class="scroll-arrow">
+      <a href="#about"><i class="fas fa-chevron-down"></i></a>
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#tech">Tech</a>
+    </nav>
   </header>
-
-  <section>
-    <h2>About Me</h2>
-    <p>Hi! I'm <strong>zhrexx</strong>, a passionate developer exploring low-level programming, networking, and crafting tools to enhance performance.</p>
-  </section>
-
-  <section class="chatbot-container">
-    <h2 class="chatbot-header">👾 Chatbot</h2>
-    <div class="chatbox"></div>
-  </section>
-
-  <section>
-    <h2>Featured Projects</h2>
-    <div class="project">
-      <h3>OrtaVM</h3>
-      <p>A virtual machine with its own assembly compiling to bytecode with beautiful error handling.</p>
-      <a href="https://github.com/zhrexx/OrtaVM" class="button">View Repository</a>
-    </div>
-    <div class="project">
-      <h3>samba.h</h3>
-      <p>A modular build system designed for dynamic configurations and optimized workflows.</p>
-      <a href="https://github.com/zhrxxgroup/samba.h" class="button">View Repository</a>
-    </div>
-  </section>
-
+  <main>
+    <section id="about" class="section">
+      <h2>About Me</h2>
+      <p>I'm zhrexx, a low-level developer based in Germany, dedicated to simplicity and performance. I craft elegant, fast code for performance-critical systems, pushing the boundaries of what's possible.</p>
+    </section>
+    <section id="projects" class="section">
+      <h2>Current Projects</h2>
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>OrtaVM</h3>
+          <p>Custom virtual machine with its own bytecode format and the Nyva programming language.</p>
+          <a href="https://github.com/zhrexx/OrtaVM">GitHub Repo</a>
+        </div>
+        <div class="project-card">
+          <h3>MicroForge</h3>
+          <p>High-performance utility libraries designed for efficiency and minimal footprint.</p>
+          <a href="https://github.com/zhrexx/MicroForge">GitHub Repo</a>
+        </div>
+      </div>
+    </section>
+    <section id="tech" class="section">
+      <h2>Tech Stack</h2>
+      <p>My toolkit focuses on low-level programming languages and systems that prioritize performance, efficiency, and direct hardware control. From systems programming to embedded development, I leverage these technologies to build fast, reliable software.</p>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <i class="fas fa-code"></i>
+          <p>C</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-bolt"></i>
+          <p>Zig</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-moon"></i>
+          <p>Lua</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-microchip"></i>
+          <p>Assembly</p>
+        </div>
+        <div class="tech-item">
+          <i class="fab fa-linux"></i>
+          <p>Linux</p>
+        </div>
+      </div>
+    </section>
+  </main>
   <footer>
-    <p>Thank you for visiting! Let's collaborate and build amazing projects!</p>
-    <p>📧 Email: <a href="mailto:info@zhrxxgroup.com" style="color: #fff; text-decoration: underline;">info@zhrxxgroup.com</a></p>
-    <p>🌐 Website: <a href="https://zhrxxgroup.com" style="color: #fff; text-decoration: underline;">zhrxxgroup.com</a></p>
+    <a href="https://github.com/zhrexx">© 2025 zhrexx</a>
+    <a href="mailto:moretzjan@gmail.com" class="mail-button">moretzjan@gmail.com</a>
   </footer>
+  <div class="back-to-top"><i class="fas fa-arrow-up"></i></div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            gsap.fromTo(entry.target, 
+              { opacity: 0, scale: 0.95, y: 50 }, 
+              { opacity: 1, scale: 1, y: 0, duration: 1, ease: 'power3.out' }
+            );
+          }
+        });
+      }, { threshold: 0.1 });
+      sections.forEach(section => observer.observe(section));
+      const backToTop = document.querySelector('.back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.getElementById('progressBar').style.width = scrolled + '%';
+      });
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ alpha: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      document.getElementById('canvas-container').appendChild(renderer.domElement);
+      const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+      const material = new THREE.MeshBasicMaterial({ color: 0x70a5fd, wireframe: true });
+      const torusKnot = new THREE.Mesh(geometry, material);
+      scene.add(torusKnot);
+      camera.position.z = 30;
+      function animate() {
+        requestAnimationFrame(animate);
+        torusKnot.rotation.x += 0.005;
+        torusKnot.rotation.y += 0.005;
+        renderer.render(scene, camera);
+      }
+      animate();
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+      window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        torusKnot.position.y = -scrollY * 0.002;
+        torusKnot.rotation.z = scrollY * 0.002;
+      });
+      window.addEventListener('mousemove', (event) => {
+        const mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+        const mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        gsap.to(torusKnot.rotation, {
+          x: mouseY * 0.5,
+          y: mouseX * 0.5,
+          duration: 1,
+          ease: 'power2.out'
+        });
+      });
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').substring(1);
+          const targetSection = document.getElementById(targetId);
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+          gsap.to(link, {
+            scale: 1.1,
+            duration: 0.3,
+            yoyo: true,
+            repeat: 1,
+            ease: 'power2.inOut'
+          });
+        });
+      });
+    });
+  </script>
 </body>
 </html>
